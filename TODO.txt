@@ -1,0 +1,5 @@
+Better Project Structure (if possible)
+
+Add API authentication
+
+Generate QR Code
