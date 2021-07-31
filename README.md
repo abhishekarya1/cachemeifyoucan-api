@@ -46,6 +46,11 @@ GET /xDFr8a
 | 404 | `NOT FOUND` |
 | 500 | `INTERNAL SERVER ERROR` |
 
+### Run
+```sh
+$ uvicorn app:api --reload
+```
+
 ### References
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [validators library](https://pypi.org/project/validators/)
