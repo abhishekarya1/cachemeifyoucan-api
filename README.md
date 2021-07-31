@@ -46,11 +46,25 @@ GET /xDFr8a
 | 404 | `NOT FOUND` |
 | 500 | `INTERNAL SERVER ERROR` |
 
-### Run
+### Run on local
 ```sh
 $ uvicorn app:api --reload
 ```
+### Heroku Setup
+```sh
+$ heroku apps
+$ heroku git:remote -a cachemeifyoucan-api 	#run in git repo
+```
+#### Monitoring
+```sh
+$ heroku redis:info
+$ heroku redis:maxmemory redis_instance_name --policy allkeys-lru
+``` 
 
+```sh
+$ heroku redis:cli
+$ flushall
+```
 ### References
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [validators library](https://pypi.org/project/validators/)
