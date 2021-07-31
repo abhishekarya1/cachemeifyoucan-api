@@ -58,7 +58,5 @@ $ uvicorn app:api --reload
 ### Acknowledgements
 - [DIDN'T WORK in Python - Regex for URL matching](https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url)
 - [Deploy FastAPI to Heroku](https://towardsdatascience.com/how-to-deploy-your-fastapi-app-on-heroku-for-free-8d4271a4ab9)
-
-### Further
-- Seal and test API
-- View OpenAPI Docs in FastAPI
+- [Repo for above](https://github.com/shinokada/fastapi-drag-and-drop)
+- [Linking redis on Heroku](https://devcenter.heroku.com/articles/heroku-redis#connecting-in-python)
