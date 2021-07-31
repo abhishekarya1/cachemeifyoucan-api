@@ -2,11 +2,12 @@ import base64
 from datetime import datetime
 import urllib.request
 from typing import Optional
+import os
 
 from fastapi import FastAPI, Query, Response, status
 
 from hashids import Hashids
-from redis import Redis
+from redis
 
 #custom
 import constants
@@ -15,8 +16,7 @@ from models import ShortlinkResponse, LinkResponse
 
 api = FastAPI()
 
-redis = Redis(host=constants.REDIS_HOST, port=constants.REDIS_PORT, db=0)
-
+r = redis.from_url(os.environ.get("REDIS_URL"))
 
 #routes
 @api.post("/",
@@ -44,8 +44,8 @@ def generate_shortlink(response: Response, link: Optional[str] = Query(None, max
 
         shortid = None
         #if a shortlink exists
-        if redis.hexists('index', b64_code) is True:
-            shortid = str(redis.hget('index', b64_code), 'utf-8')
+        if r.hexists('index', b64_code) is True:
+            shortid = str(r.hget('index', b64_code), 'utf-8')
             gen = "Existing shortlink returned."
         else:
             #generate shortid from current timestamp
@@ -53,11 +53,11 @@ def generate_shortlink(response: Response, link: Optional[str] = Query(None, max
             shortid = hashid.encode(int(datetime.today().timestamp()))
 
             #store field-value pair to key/hash(shortid) in Redis
-            redis.hset(shortid, 'link', clean_link)
-            redis.hset(shortid, 'b64_code', b64_code)
+            r.hset(shortid, 'link', clean_link)
+            r.hset(shortid, 'b64_code', b64_code)
 
             #set b64_code-shortid in index hash
-            redis.hset('index', b64_code, shortid)
+            r.hset('index', b64_code, shortid)
             gen = "New shortlink generated."
 
         #append shortid to baseUrl
@@ -73,15 +73,15 @@ def generate_shortlink(response: Response, link: Optional[str] = Query(None, max
          response_model_exclude_unset=True)
 def expand_shortlink(shortid, response: Response):
     #if user provided invalid shorlink; not found in any hash keys
-    if len(redis.keys(shortid)) == 0:
+    if len(r.keys(shortid)) == 0:
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {'msg': 'Invalid shortlink!'}
     #print(link_b)
     #print(type(link_b))
     #browser hits twice with GET :/
     else:
-        link = str(redis.hget(shortid, 'link'), 'utf-8')
-        base64code = str(redis.hget(shortid, 'b64_code'), 'utf-8')
+        link = str(r.hget(shortid, 'link'), 'utf-8')
+        base64code = str(r.hget(shortid, 'b64_code'), 'utf-8')
         #if og_link is up: send og_link in response
         if urllib.request.urlopen(
                 link).getcode() == 200:  #changed to != for debug
