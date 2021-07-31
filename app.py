@@ -7,7 +7,7 @@ import os
 from fastapi import FastAPI, Query, Response, status
 
 from hashids import Hashids
-from redis
+import redis
 
 #custom
 import constants
