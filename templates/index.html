@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<title>Cache Me If You Can!</title>
+</head>
+<body>
+	<h3> Get your shortlink here: <h3>
+<form action="{{ url_for('gen_shortlink') }}" method="POST">
+	<input type="url" name = "link">
+	<input type="submit" value="Generate">
+</form>
+
+{% include 'shortlink.html' %}
+
+</body>
+</html>
