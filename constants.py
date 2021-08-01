@@ -1,4 +1,4 @@
-BASE_URL = "https://cachemeifyoucan-api.herokuapp.com"
+BASE_URL = "http://localhost:5000"
 
 HASHID_SALT = "asdfRTY678NM"
 
