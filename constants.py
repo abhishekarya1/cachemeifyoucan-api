@@ -1,4 +1,4 @@
-BASE_URL = "http://localhost:5000"
+BASE_URL = "http://localhost:8000"
 
 HASHID_SALT = "asdfRTY678NM"
 
