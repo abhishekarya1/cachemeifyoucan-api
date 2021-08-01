@@ -18,6 +18,9 @@ $ heroku redis:maxmemory redis_instance_name --policy allkeys-lru
 ```sh
 $ heroku redis:cli
 $ flushall
+$ flushdb
+$ quit
+-> Ctrl + C
 ```
 
 [Heroku Datacenter Link](https://data.heroku.com/)
