@@ -46,10 +46,12 @@ GET /xDFr8a
 | 404 | `NOT FOUND` |
 | 500 | `INTERNAL SERVER ERROR` |
 
-### Run
+### Run Locally
 ```sh
 $ uvicorn app:api --reload
 ```
+### Schema
+![api_schema](/api_datastore_schema.png)
 
 ### References
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
